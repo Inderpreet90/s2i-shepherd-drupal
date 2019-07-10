@@ -109,7 +109,7 @@ RUN chmod -R g+rwX  /var/www \
 RUN usermod -d /code www-data
 
 # Set user to run as
-USER 33
+USER 33:0
 
 # Start the web server.
 CMD ["/usr/local/s2i/run"]
