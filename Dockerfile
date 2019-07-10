@@ -108,7 +108,7 @@ RUN chmod -R g+rwX  /var/www \
 # Change the homedir of www-data to be /code.
 RUN usermod -d /code www-data
 
-USER 33:80001
+USER 33:0
 
 # Start the web server.
 CMD ["/usr/local/s2i/run"]
