@@ -108,14 +108,8 @@ RUN chmod -R g+rwX  /var/www \
 # Change the homedir of www-data to be /code.
 RUN usermod -d /code www-data
 
-# Add supplemental group.
-RUN groupadd -g 80001 supplemental
-
 # Set user to run as
 USER 33
-
-# Switch to supplemental group.
-RUN newgrp supplemental
 
 # Start the web server.
 CMD ["/usr/local/s2i/run"]
