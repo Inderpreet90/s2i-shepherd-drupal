@@ -109,7 +109,7 @@ RUN chmod -R g+rwX  /var/www \
 RUN usermod -d /code www-data
 
 # Add supplemental group.
-RUN groupadd -g 80001 www-data
+RUN groupadd -g 80001 supplemental
 
 # Set user to run as
 USER 33
