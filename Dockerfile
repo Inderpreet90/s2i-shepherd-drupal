@@ -115,7 +115,7 @@ RUN groupadd -g 80001 supplemental
 USER 33
 
 # Switch to supplemental group.
-RUN newgrp 80001
+RUN newgrp supplemental
 
 # Start the web server.
 CMD ["/usr/local/s2i/run"]
