@@ -91,12 +91,12 @@ EXPOSE 8080
 WORKDIR /code
 
 # Change all ownership to User 33 (www-data) and Group 80001 (supplemental group).
-RUN chown -R 33:0   /var/www \
-&&  chown -R 33:0   /run/lock \
-&&  chown -R 33:0   /var/run/apache2 \
-&&  chown -R 33:0   /var/log/apache2 \
-&&  chown -R 33:0   /code \
-&&  chown -R 33:0   /shared
+RUN chown -R 33:80001   /var/www \
+&&  chown -R 33:80001   /run/lock \
+&&  chown -R 33:80001   /var/run/apache2 \
+&&  chown -R 33:80001   /var/log/apache2 \
+&&  chown -R 33:80001   /code \
+&&  chown -R 33:80001   /shared
 
 RUN chmod -R g+rwX  /var/www \
 &&  chmod -R g+rwX  /run/lock \
@@ -105,11 +105,20 @@ RUN chmod -R g+rwX  /var/www \
 &&  chmod -R g+rwX  /code \
 &&  chmod -R g+rwX  /shared
 
+RUN find /var/www \
+  /run/lock \
+  /var/run/apache2 \
+  /var/log/apache2 \
+  /code \
+  /shared \
+  -type d \
+  -exec chmod g+s {} \;
+
 # Change the homedir of www-data to be /code.
 RUN usermod -d /code www-data
 
 # Set user to run as
-USER 33:0
+USER 33
 
 # Start the web server.
 CMD ["/usr/local/s2i/run"]
